@@ -1,21 +1,20 @@
-import { Component } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./index.css";
 
-class FavoritePlace extends Component {
-  state = {
-    temp: "",
-    cityName: "",
-    weatherImg: "",
-  };
+const FavoritePlace = (props) => {
+  const { eachPlace } = props;
+  const { place } = eachPlace;
 
-  componentDidMount = () => {
-    this.getWetherReport();
-  };
+  const [temp, setTemp] = useState("");
+  const [cityName, setCityName] = useState("");
+  const [weatherImg, setWeatherImg] = useState("");
 
-  getWetherReport = async () => {
-    const { eachPlace } = this.props;
-    const { place } = eachPlace;
+  useEffect(() => {
+    getWetherReport();
+  }, []);
+
+  const getWetherReport = async () => {
     const apikey = "0af51ad90c53822d9bf1381557e1fb25";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${apikey}&units=metric`;
     const options = {
@@ -52,26 +51,25 @@ class FavoritePlace extends Component {
           "https://res.cloudinary.com/daflxmokq/image/upload/v1684040672/1497075_issr2r.png";
       }
 
-      this.setState({ temp, weatherImg, cityName });
+      setTemp(temp);
+      setWeatherImg(weatherImg);
+      setCityName(cityName);
     } else {
       alert(data.message);
     }
   };
 
-  render() {
-    const { temp, weatherImg, cityName } = this.state;
-    return (
-      <>
-        {cityName !== "" && (
-          <li className="list-item">
-            <img className="weather-img" src={weatherImg} alt="weather-img" />
-            <p className="temp-num">{temp}°C</p>
-            <h1 className="city-name">{cityName}</h1>
-          </li>
-        )}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      {cityName !== "" && (
+        <li className="list-item">
+          <img className="weather-img" src={weatherImg} alt="weather-img" />
+          <p className="temp-num">{temp}°C</p>
+          <h1 className="city-name">{cityName}</h1>
+        </li>
+      )}
+    </>
+  );
+};
 
 export default FavoritePlace;
