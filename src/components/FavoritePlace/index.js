@@ -5,7 +5,7 @@ import "./index.css";
 class FavoritePlace extends Component {
   state = {
     temp: "",
-    cityname: "",
+    cityName: "",
     weatherImg: "",
   };
 
@@ -25,7 +25,7 @@ class FavoritePlace extends Component {
     const data = await response.json();
     if (response.ok) {
       const temp = Math.round(data.main.temp);
-      const cityname = data.name;
+      const cityName = data.name;
 
       const weather = data.weather[0].main;
       let weatherImg = "";
@@ -52,21 +52,21 @@ class FavoritePlace extends Component {
           "https://res.cloudinary.com/daflxmokq/image/upload/v1684040672/1497075_issr2r.png";
       }
 
-      this.setState({ temp, weatherImg, cityname });
+      this.setState({ temp, weatherImg, cityName });
     } else {
       alert(data.message);
     }
   };
 
   render() {
-    const { temp, weatherImg, cityname } = this.state;
+    const { temp, weatherImg, cityName } = this.state;
     return (
       <>
-        {cityname !== "" && (
+        {cityName !== "" && (
           <li className="list-item">
             <img className="weather-img" src={weatherImg} alt="weather-img" />
             <p className="temp-num">{temp}°C</p>
-            <h1 className="city-name">{cityname}</h1>
+            <h1 className="city-name">{cityName}</h1>
           </li>
         )}
       </>
