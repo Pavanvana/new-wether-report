@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 
 import { HiOutlineSearch, HiOutlineLocationMarker } from "react-icons/hi";
-import FavoritePlace from "../FavoritePlace";
+import FavoritePlace from "../FavoritePlace/Home";
 
 import "./index.css";
 
